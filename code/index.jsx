@@ -1,13 +1,16 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+
 import { fetch } from 'whatwg-fetch';
 import jsonp from 'fetch-jsonp';
-import styles from './style.js';
+
 const print = function(value) {
   console.log(value);
 };
-class Page_0 extends Component {
+
+class Index extends Component {
   state = {
     data: [
       {
@@ -30,6 +33,7 @@ class Page_0 extends Component {
     ]
   };
   constructor(props, context) {
+    super();
     console.log('super props');
     this.fetch_example();
     this.jsonp_example();
@@ -62,10 +66,10 @@ class Page_0 extends Component {
   }
   render() {
     return (
-      <div style={styles.box}>
+      <View style={styles.box}>
         {this.state.data.map((item, index) => {
           return (
-            <div
+            <View
               key={index}
               onClick={e => {
                 window.open(item.url, '_blank');
@@ -73,43 +77,150 @@ class Page_0 extends Component {
               data-url={item.url}
               key={item.index}
             >
-              <div style={styles.bd}>
-                <img style={styles.layer} src={'https://img.alicdn.com/tfs/TB1bLoWoYH1gK0jSZFwXXc7aXXa-684-684.png'} />
-                <img style={styles.bg} src={item.coverImage} />
-                <div style={styles.wrap}>
-                  <img
+              <View style={styles.bd}>
+                <Image
+                  style={styles.layer}
+                  source={{ uri: 'https://img.alicdn.com/tfs/TB1bLoWoYH1gK0jSZFwXXc7aXXa-684-684.png' }}
+                />
+                <Image style={styles.bg} source={{ uri: item.coverImage }} />
+                <View style={styles.wrap}>
+                  <Image
                     style={styles.riverdinwei}
-                    src={'https://img.alicdn.com/tfs/TB1mtZRoVT7gK0jSZFpXXaTkpXa-28-36.png'}
+                    source={{ uri: 'https://img.alicdn.com/tfs/TB1mtZRoVT7gK0jSZFpXXaTkpXa-28-36.png' }}
                   />
-                  <span style={styles.distance}>距离500m</span>
-                </div>
-              </div>
-              <div style={styles.main}>
-                <span style={styles.title}>{item.title}</span>
-              </div>
-              <div style={styles.ft}>
-                <div style={styles.block}>
-                  <img
+                  <Text style={styles.distance}>距离500m</Text>
+                </View>
+              </View>
+              <View style={styles.main}>
+                <Text style={styles.title}>{item.title}</Text>
+              </View>
+              <View style={styles.ft}>
+                <View style={styles.block}>
+                  <Image
                     style={styles.xianjin}
-                    src={'https://img.alicdn.com/tfs/TB1OvsYoW61gK0jSZFlXXXDKFXa-60-60.png'}
+                    source={{ uri: 'https://img.alicdn.com/tfs/TB1OvsYoW61gK0jSZFlXXXDKFXa-60-60.png' }}
                   />
-                  <span style={styles.fashionHome}>{item.user.userName}</span>
-                </div>
+                  <Text style={styles.fashionHome}>{item.user.userName}</Text>
+                </View>
                 {this.isReadCountShow(item.readCount) && (
-                  <div style={styles.group}>
-                    <img
+                  <View style={styles.group}>
+                    <Image
                       style={styles.favorite}
-                      src={'https://img.alicdn.com/tfs/TB1arwYo7T2gK0jSZFkXXcIQFXa-46-44.png'}
+                      source={{ uri: 'https://img.alicdn.com/tfs/TB1arwYo7T2gK0jSZFkXXcIQFXa-46-44.png' }}
                     />
-                    <span style={styles.num}>{item.readCount}</span>
-                  </div>
+                    <Text style={styles.num}>{item.readCount}</Text>
+                  </View>
                 )}
-              </div>
-            </div>
+              </View>
+            </View>
           );
         })}
-      </div>
+      </View>
     );
   }
 }
-export default Page_0;
+
+export default Index;
+
+const styles = StyleSheet.create({
+  box: { display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start', height: 534 },
+  bd: {
+    display: 'flex',
+    position: 'relative',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    opacity: '1.00',
+    width: 342,
+    height: 342
+  },
+  layer: { position: 'absolute', top: 0, left: 0, width: 342, height: 342, overflow: 'hidden' },
+  bg: { position: 'absolute', top: 0, left: 0, opacity: '1.00', width: 342, height: 342 },
+  wrap: {
+    boxSizing: 'border-box',
+    display: 'flex',
+    position: 'relative',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 18,
+    marginLeft: 18,
+    borderRadius: 15,
+    backgroundColor: 'rgba(0,0,0,0.40)',
+    paddingRight: 9,
+    paddingLeft: 10,
+    height: 30
+  },
+  riverdinwei: { opacity: '1.00', width: 14, height: 18 },
+  distance: {
+    marginLeft: 4,
+    width: 84,
+    height: 22,
+    lineHeight: 22,
+    whiteSpace: 'nowrap',
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 400,
+    lines: 1
+  },
+  main: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    width: 342,
+    height: 114
+  },
+  title: {
+    marginTop: 22,
+    width: 300,
+    height: 88,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    lineHeight: 44,
+    color: '#333333',
+    fontSize: 30,
+    fontWeight: 400,
+    lines: 2
+  },
+  ft: {
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+    backgroundColor: '#ffffff',
+    paddingRight: 17,
+    paddingLeft: 18,
+    width: 342,
+    height: 78,
+    overflow: 'hidden'
+  },
+  block: { display: 'flex', alignItems: 'center', flexDirection: 'row', height: 30 },
+  xianjin: { width: 30, height: 30 },
+  fashionHome: {
+    marginLeft: 6,
+    width: 96,
+    height: 28,
+    lineHeight: 28,
+    whiteSpace: 'nowrap',
+    color: '#666666',
+    fontSize: 24,
+    fontWeight: 300,
+    lines: 1
+  },
+  group: { display: 'flex', alignItems: 'center', flexDirection: 'row', height: 30 },
+  favorite: { width: 22, height: 22 },
+  num: {
+    marginLeft: 5,
+    width: 36,
+    height: 26,
+    lineHeight: 26,
+    whiteSpace: 'nowrap',
+    color: '#999999',
+    fontSize: 22,
+    fontWeight: 400,
+    lines: 1
+  }
+});

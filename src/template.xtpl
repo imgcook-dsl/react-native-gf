@@ -1,12 +1,13 @@
 'use strict';
 
-import React, { Component } from "react";
-import { View, StyleSheet, Text, Image } from 'react-native';
+import React, { Component } from 'react';
 
-{{{mockData}}}
+{{{imports}}}
 
-{{{modClass}}}
-
-{{{export}}}
+{{{utils}}}
 
 {{{style}}}
+
+{{{classes}}}
+
+{{{exports}}}
